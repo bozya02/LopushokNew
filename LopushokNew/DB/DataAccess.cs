@@ -16,6 +16,7 @@ namespace LopushokNew.DB
 
 
         public static List<Product> GetProducts() => _products.ToList();
+        public static List<Material> GetMaterials() => LopushokNewBozyaEntities.GetContext().Materials.ToList();
         public static List<ProductType> GetProductTypes() => LopushokNewBozyaEntities.GetContext().ProductTypes.ToList();
 
         public static void SaveProduct(Product product)
@@ -27,5 +28,9 @@ namespace LopushokNew.DB
             AddNewItemEvent?.Invoke();
         }
 
+        public static bool IsExist(Product product)
+        {
+            return _products.Any(p => p.Article == product.Article && p.Id != product.);
+        }
     }
 }

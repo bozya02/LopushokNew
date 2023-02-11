@@ -79,7 +79,7 @@ namespace LopushokNew.Windows
             ApplyFilters();
         }
 
-        private void ApplyFilters()
+        private void ApplyFilters(bool isStartFilter = true)
         {
             var search = tbSearch.Text.ToLower().Trim();
             var sorting = cbSorting.SelectedItem as string;
@@ -87,6 +87,9 @@ namespace LopushokNew.Windows
 
             if (string.IsNullOrEmpty(sorting) || productType == null)
                 return;
+
+            if (isStartFilter)
+                page = 0;
 
             Products = _products.FindAll(x => x.Name.ToLower().Contains(search) ||
                                               x.Description.ToLower().Contains(search));
@@ -106,7 +109,12 @@ namespace LopushokNew.Windows
 
         private void lvProducts_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            var product = lvProducts.SelectedItem as Product;
 
+            if (product != null)
+                new ProductWindow(product).ShowDialog();
+
+            lvProducts.SelectedIndex = -1;
         }
 
         private void Paginator(object sender, MouseButtonEventArgs e)
@@ -122,7 +130,7 @@ namespace LopushokNew.Windows
             else if (int.TryParse(content, out int pageNumber))
                 page = pageNumber - 1;
 
-            ApplyFilters();
+            ApplyFilters(false);
         }
 
         private void GeneratePages()

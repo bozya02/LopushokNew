@@ -6,7 +6,99 @@
         xmlns:local="clr-namespace:LopushokNew.Windows"
         mc:Ignorable="d" FontFamily="Gabriola"
         Title="Товар" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="1 -5 0 -10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Наимнование" Grid.Row="0"/>
+        <TextBox Text="{Binding Product.Name}" Grid.Column="1"/>
+
+        <Label Content="Артикул" Grid.Row="1"/>
+        <TextBox Text="{Binding Product.Article}" Grid.Row="1" Grid.Column="1"/>
+
+        <Label Content="Минимальная цена" Grid.Row="2"/>
+        <TextBox Text="{Binding Product.MinPrice}" Grid.Row="2" Grid.Column="1"/>
         
+        <Label Content="Описание" Grid.Row="3"/>
+        <TextBox Text="{Binding Product.Description}" VerticalAlignment="Stretch"
+                 Grid.Row="3" Grid.RowSpan="2" Grid.Column="1"
+                 TextWrapping="Wrap" AcceptsReturn="True"
+                 VerticalScrollBarVisibility="Auto"/>
+
+        <Label Content="Цех" Grid.Row="0" Grid.Column="2"/>
+        <TextBox Text="{Binding Product.Workshop}" Grid.Row="0" Grid.Column="3"/>
+
+        <Label Content="Кол-во чел для пр" Grid.Row="1" Grid.Column="2"/>
+        <TextBox Text="{Binding Product.PersonForProduction}" Grid.Row="1" Grid.Column="3"/>
+
+        <Label Content="Из чего" Grid.Row="2" Grid.Column="2"/>
+        <ListView x:Name="lvMaterials" ItemsSource="{Binding Product.ProductMaterials}"
+                  Grid.Row="2" Grid.RowSpan="2" Grid.Column="3">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding Material.Name}" FontSize="18" Margin="0"/>
+                        <TextBox Text="{Binding MaterialQuantity}" FontSize="18" Margin="0"/>
+                        <Label Content="шт" FontSize="18" Margin="0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Label Content="Материалы" Grid.Row="4" Grid.Column="2"/>
+        <ComboBox x:Name="cbMaterials" Grid.Row="4" Grid.Column="3"
+                  ItemsSource="{Binding Materials}" SelectionChanged="cbMaterials_SelectionChanged" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Label Content="Тип" Grid.Row="0" Grid.Column="4"/>
+        <ComboBox x:Name="cbProductType" Grid.Row="0" Grid.Column="5"
+                  ItemsSource="{Binding ProductTypes}" SelectedItem="{Binding Product.ProductType}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Image x:Name="imgProduct" Source="{Binding Product.Image}" Grid.Row="1" Grid.Column="5" Grid.RowSpan="3"/>
+        <Button x:Name="btnImage" Content="Выбрать фото" Grid.Row="4" Grid.Column="5" VerticalAlignment="Center" Click="btnImage_Click"/>
+
+        <Button x:Name="btnDelete" Content="Удалить" Grid.Column="0" Grid.Row="5" Visibility="Hidden" Click="btnDelete_Click"/>
+        <Button x:Name="btnSave" Content="Сохранить" Grid.ColumnSpan="6" Grid.Row="5"
+                HorizontalAlignment="Center" FontSize="20" Click="btnSave_Click"/>
     </Grid>
 </Window>

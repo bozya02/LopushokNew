@@ -21,15 +21,15 @@ namespace LopushokNew.DB
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Article { get; set; }
-        public decimal MinPrice { get; set; }
+        public string Name { get; set; }        //
+        public string Article { get; set; }     //
+        public decimal MinPrice { get; set; }   //
         public string ImagePath { get; set; }
         public byte[] Image { get; set; }
         public Nullable<int> ProductTypeId { get; set; }
-        public int PersonForProduction { get; set; }
-        public int Workshop { get; set; }
-        public string Description { get; set; }
+        public int PersonForProduction { get; set; }    //
+        public int Workshop { get; set; }       //
+        public string Description { get; set; } //
     
         public virtual ProductType ProductType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
