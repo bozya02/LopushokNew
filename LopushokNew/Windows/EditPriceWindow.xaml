@@ -1,0 +1,22 @@
+﻿<Window x:Class="LopushokNew.Windows.EditPriceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LopushokNew.Windows"
+        mc:Ignorable="d" FontFamily="Gabriola"
+        Title="Изменить цену на" Height="150" Width="200" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+            <Label Content="Цена:" Margin="0 -5"/>
+            <TextBox x:Name="tbPrice" />
+        </StackPanel>
+
+        <Button x:Name="btnSave" Content="Сохранить" Grid.Row="1" Click="btnSave_Click"/>
+    </Grid>
+</Window>

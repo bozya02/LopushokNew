@@ -4,12 +4,105 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LopushokNew.Windows"
-        mc:Ignorable="d"
+        mc:Ignorable="d" FontFamily="Gabriola"
         Title="Лопушок" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+
         </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Поиск"/>
+            <TextBox x:Name="tbSearch" Grid.Row="1" TextChanged="tbSearch_TextChanged"/>
+
+            <Label Content="Сортировка" Grid.Column="1" HorizontalAlignment="Center"/>
+            <ComboBox Name="cbSorting" Grid.Column="1" Grid.Row="1"
+                      ItemsSource="{Binding Sortings.Keys}" SelectedIndex="0"
+                      SelectionChanged="cbSorting_SelectionChanged"/>
+            
+            <Label Content="Фильтрация" Grid.Column="2" HorizontalAlignment="Center"/>
+            <ComboBox Name="cbProductType" Grid.Column="2" Grid.Row="1"
+                      ItemsSource="{Binding ProductTypes}" SelectedIndex="0"
+                      SelectionChanged="cbProducttype_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+
+        <ListView x:Name="lvProducts" Grid.Row="1" ItemsSource="{Binding Products}" HorizontalContentAlignment="Stretch" MouseDoubleClick="lvProducts_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Width="80" Height="80" Margin="10 5 20 5">
+                                <Image.Source>
+                                    <Binding Path="Image">
+                                        <Binding.TargetNullValue>
+                                            <ImageSource>/Resources/default_image.png</ImageSource>
+                                        </Binding.TargetNullValue>
+                                    </Binding>
+                                </Image.Source>
+                            </Image>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock FontSize="22" Style="{DynamicResource Product}">
+                                    <Run Text="{Binding ProductType.Name}"/>
+                                    <Run Text="|"/>
+                                    <Run Text="{Binding Name}"/>
+                                </TextBlock>
+
+                                <TextBlock Text="{Binding Article}" FontSize="18" Style="{DynamicResource Product}"/>
+                                
+                                <TextBlock Text="{Binding MaterialsList, StringFormat={}Материалы: {0}}" TextWrapping="Wrap"
+                                           Width="500" Style="{DynamicResource Product}" HorizontalAlignment="Left" />
+                            </StackPanel>
+
+                            <Label Content="{Binding MinPrice}" Grid.Column="2"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnEditPrice" Content="Изменить цену на" Click="btnEditPrice_Click"/>
+            <Button x:Name="btnNewProduct" Content="Добавить товар" Grid.ColumnSpan="3" HorizontalAlignment="Center" Click="btnNewProduct_Click"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center">
+                <TextBlock Text="&lt;" Style="{DynamicResource Pagination}" PreviewMouseDown="Paginator"/>
+                <StackPanel x:Name="spPages" Orientation="Horizontal">
+                    
+                </StackPanel>
+                <TextBlock Text="&gt;" Style="{DynamicResource Pagination}" PreviewMouseDown="Paginator"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

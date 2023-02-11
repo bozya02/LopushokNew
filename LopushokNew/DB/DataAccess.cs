@@ -24,6 +24,7 @@ namespace LopushokNew.DB
                 _products.Add(product);
 
             LopushokNewBozyaEntities.GetContext().SaveChanges();
+            AddNewItemEvent?.Invoke();
         }
 
     }

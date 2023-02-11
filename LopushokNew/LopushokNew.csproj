@@ -44,6 +44,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -70,6 +71,10 @@
     </ApplicationDefinition>
     <Compile Include="DB\DataAccess.cs" />
     <Compile Include="DB\LopushokNewBozyaEntities.cs" />
+    <Compile Include="DB\ProductParial.cs" />
+    <Compile Include="Windows\EditPriceWindow.xaml.cs">
+      <DependentUpon>EditPriceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ProductsListWindow.xaml.cs">
       <DependentUpon>ProductsListWindow.xaml</DependentUpon>
     </Compile>
@@ -113,7 +118,18 @@
     <Compile Include="DB\Unit.cs">
       <DependentUpon>LopushokModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ProductWindow.xaml.cs">
+      <DependentUpon>ProductWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Windows\EditPriceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ProductsListWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProductWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
