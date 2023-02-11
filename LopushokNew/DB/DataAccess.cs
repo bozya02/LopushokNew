@@ -30,7 +30,7 @@ namespace LopushokNew.DB
 
         public static bool IsExist(Product product)
         {
-            return _products.Any(p => p.Article == product.Article && p.Id != product.);
+            return _products.Any(p => p.Article == product.Article && p.Id != product.Id);
         }
     }
 }
