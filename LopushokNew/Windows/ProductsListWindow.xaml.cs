@@ -45,10 +45,10 @@ namespace LopushokNew.Windows
             {
                 { "Наименование по убыванию", x => x.Name },
                 { "Наименование по возратсанию", x => x.Name }, //reverse
-                { "Цех по убыванию", x => x.Name },
-                { "Цех по возратсанию", x => x.Name },          //reverse
-                { "Стоимость по убыванию", x => x.Name },
-                { "Стоимость по возратсанию", x => x.Name },    //reverse
+                { "Цех по убыванию", x => x.Workshop },
+                { "Цех по возратсанию", x => x.Workshop },          //reverse
+                { "Стоимость по убыванию", x => x.MinPrice },
+                { "Стоимость по возратсанию", x => x.MinPrice },    //reverse
             };
 
             this.DataContext = this;
